@@ -17,10 +17,11 @@ class HolidaysTableSeeder extends Seeder
     {
           for ($i=0 ; $i < 40 ; $i++){
               $newHoliday = new Holiday();
-              $newHoliday->title = $faker->words(5, true);
+              $newHoliday->title = $faker->sentence(4);
               $newHoliday->destination = $faker->name();
               $newHoliday->description = $faker->paragraphs(6, true);
               $newHoliday->holiday_start = $faker->dateTime();
+              $newHoliday->image_url = $faker->imageUrl(800, 400, 'villages', true, $newHoliday->destination);
 
               $newHoliday->save();
           }
