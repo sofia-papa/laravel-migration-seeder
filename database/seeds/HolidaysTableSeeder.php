@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use App\Models\Holiday;
 use Illuminate\Support\Str;
 
+use Faker\Generator as Faker;
+
 class HolidaysTableSeeder extends Seeder
 {
     /**
@@ -11,9 +13,22 @@ class HolidaysTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $holidays = [
+          for ($i=0 ; $i < 40 ; $i++){
+              $newHoliday = new Holiday();
+              $newHoliday->title = $faker->words(5, true);
+              $newHoliday->destination = $faker->name();
+              $newHoliday->description = $faker->paragraphs(6, true);
+              $newHoliday->holiday_start = $faker->dateTime();
+
+              $newHoliday->save();
+          }
+
+        }
+
+
+        /* $holidays = [
             [
                 "title" => "Settimana bianca",
                 "destination" => "Cortina",
@@ -37,14 +52,14 @@ class HolidaysTableSeeder extends Seeder
         ];
 
         foreach ($holidays as $holiday){
-            $newHoliday = new Holiday();
+            $newHoliday = new Holiday(); */
             /* $newHoliday->title = $holiday['title'];
             $newHoliday->destination = $holiday['destination'];
             $newHoliday->description = $holiday['description'];
             $newHoliday->holiday_start = $holiday['holiday_start']; */
 
-            $newHoliday->fill($holiday);
-            $newHoliday->save();
+            /* $newHoliday->fill($holiday);
+            $newHoliday->save(); */
         }
-    }
-}
+    
+
